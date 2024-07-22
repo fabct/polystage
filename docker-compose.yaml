@@ -15,10 +15,14 @@ services:
     build:
       context: https://github.com/fabct/Polystage-frontend.git#feature/session-admin
       dockerfile: Dockerfile
+      args:
+        - VITE_PORT=${PORT_FRONTEND}
+        - VITE_HOST=0.0.0.0
+        - VITE_BACKEND_URL=${BACKEND_URL}
     ports:
       - "${PORT_FRONTEND}:${PORT_FRONTEND}"
     environment:
-      - PORT=${PORT_FRONTEND}
-      - HOST=0.0.0.0
-      - BACKEND_URL=${BACKEND_URL}
+      - VITE_PORT=${PORT_FRONTEND}
+      - VITE_HOST=0.0.0.0
+      - VITE_BACKEND_URL=${BACKEND_URL}
     command: ["npm", "run", "preview"]
