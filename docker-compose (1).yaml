@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  polystage_backend:
+    build:
+      context: https://github.com/TillianDS/polystage_backend.git#auth_token
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT_BACKEND}:${PORT_BACKEND}"
+    command: ["gunicorn", "--bind", ":${PORT_BACKEND}", "polystage_backend.wsgi:application"]
+    environment:
+      - PORT=${PORT_BACKEND}
+      - BACKEND_URL=${BACKEND_URL}
+
+  polystage_frontend:
+    build:
+      context: https://github.com/fabct/Polystage-frontend.git
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT_FRONTEND}:${PORT_FRONTEND}"
+    environment:
+      - PORT=${PORT_FRONTEND}
+      - HOST=0.0.0.0
+      - BACKEND_URL=${BACKEND_URL}
+    command: ["npm", "run", "preview"]
