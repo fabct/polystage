@@ -13,7 +13,7 @@ services:
 
   polystage_frontend:
     build:
-      context: https://github.com/fabct/Polystage-frontend.git#auth_token
+      context: https://github.com/fabct/Polystage-frontend.git#feature/session-admin
       dockerfile: Dockerfile
     ports:
       - "${PORT_FRONTEND}:${PORT_FRONTEND}"
